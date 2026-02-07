@@ -12,13 +12,28 @@ go install github.com/alesr/jwtp/cmd/jwtp@latest
 jwtp -token eyJhbGciOiJIUzI1NiIs...
 ```
 
-Verify the signature if you have the secret:
+Decode and verify the signature (if you have the secret):
 
 ```
-jwtp -token eyJhbGciOiJIUzI1NiIs... -secret your-secret
-```
+~ ❱ jwtp -token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.KMUFsIDTnFmyG3nMiGM6H9FNFUROf3wh7SmqJp-QV30 -secret a-string-secret-at-least-256-bits-long
+── HEADER ──────────────────────────────────
+  Algorithm        HS256
+  Type             JWT
 
-You get the header, payload with human-readable timestamps, and a status section telling you if the token is expired, not yet valid, and whether the signature checks out.
+── PAYLOAD ──────────────────────────────────
+  Subject          1234567890
+  Issued At        2018-01-18T01:30:22Z (8 years ago)
+  ────────────────────────────────────
+  admin            true
+  name             John Doe
+
+── STATUS ──────────────────────────────────
+  ✓ Structure      Valid JWT with 3 parts
+  ✓ Algorithm      HS256
+  ✓ Issued At      Issued 8 years ago
+  ⚠ Expiration     No 'exp' claim present
+  ✓ Signature      Valid (verified with provided secret)
+```
 
 ## Library
 
