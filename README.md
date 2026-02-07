@@ -1,6 +1,7 @@
 # jwtp
 
 [![Go Reference](https://pkg.go.dev/badge/github.com/alesr/jwtp.git.svg)](https://pkg.go.dev/github.com/alesr/jwtp.git)
+[![codecov](https://codecov.io/gh/alesr/jwtp/graph/badge.svg?token=7QYM4Yfupt)](https://codecov.io/gh/alesr/jwtp)
 
 Decode and verify JWT tokens in Go.
 
