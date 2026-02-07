@@ -76,4 +76,10 @@ jobs:
           cache: true
 
       - name: Run tests
-        run: go test -race -count=1 -v -cover ./...
+        run: go test -race -count=1 -v -coverprofile=coverage.out ./...
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: alesr/jwtp
