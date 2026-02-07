@@ -1,2 +1,4 @@
+github.com/alesr/jwtp v0.0.0-20260207114428-62aefd1bbd1d h1:RopAhPXOdV7/osFNWSc4C0IdsGbjwvJV0UtMY4W+ynE=
+github.com/alesr/jwtp v0.0.0-20260207114428-62aefd1bbd1d/go.mod h1:gQ6lDA31aXtZic1LtGtmXQDoAgW2rZ882NmzGioGkjs=
 github.com/golang-jwt/jwt/v5 v5.3.1 h1:kYf81DTWFe7t+1VvL7eS+jKFVWaUnK9cB1qbwn63YCY=
 github.com/golang-jwt/jwt/v5 v5.3.1/go.mod h1:fxCRLWMO43lRc8nhHWY6LGqRcf+1gQWArsqaEUEa5bE=

@@ -40,3 +40,11 @@ valid, err := tok.VerifyHMAC("my-secret") // HS256, HS384, HS512
 ```
 
 All claims are also available as a raw map via `tok.Claims`.
+
+## Development
+
+The library and CLI are separate Go modules. After cloning, set up a workspace so the CLI picks up the local library:
+
+```
+go work init . ./cmd/jwtp
+```
