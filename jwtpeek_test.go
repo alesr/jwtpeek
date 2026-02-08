@@ -1,4 +1,4 @@
-package jwtp
+package jwtpeek
 
 import (
 	"crypto/hmac"

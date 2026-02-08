@@ -1,24 +1,24 @@
-# jwtp
+# jwtpeek
 
-[![Go Reference](https://pkg.go.dev/badge/github.com/alesr/jwtp.git.svg)](https://pkg.go.dev/github.com/alesr/jwtp.git)
-[![codecov](https://codecov.io/gh/alesr/jwtp/graph/badge.svg?token=7QYM4Yfupt)](https://codecov.io/gh/alesr/jwtp)
+[![Go Reference](https://pkg.go.dev/badge/github.com/alesr/jwtpeek.git.svg)](https://pkg.go.dev/github.com/alesr/jwtpeek.git)
+[![codecov](https://codecov.io/gh/alesr/jwtpeek/graph/badge.svg?token=7QYM4Yfupt)](https://codecov.io/gh/alesr/jwtpeek)
 
 Decode and verify JWT tokens in Go.
 
 ## CLI
 
 ```
-go install github.com/alesr/jwtp/cmd/jwtp@latest
+go install github.com/alesr/jwtpeek/cmd/jwtpeek@latest
 ```
 
 ```
-jwtp -token eyJhbGciOiJIUzI1NiIs...
+jwtpeek -token eyJhbGciOiJIUzI1NiIs...
 ```
 
 Decode and verify the signature (if you have the secret):
 
 ```
-~ ❱ jwtp -token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.KMUFsIDTnFmyG3nMiGM6H9FNFUROf3wh7SmqJp-QV30 -secret a-string-secret-at-least-256-bits-long
+~ ❱ jwtpeek -token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.KMUFsIDTnFmyG3nMiGM6H9FNFUROf3wh7SmqJp-QV30 -secret a-string-secret-at-least-256-bits-long
 ── HEADER ──────────────────────────────────
   Algorithm        HS256
   Type             JWT
@@ -41,11 +41,11 @@ Decode and verify the signature (if you have the secret):
 ## Library
 
 ```
-go get github.com/alesr/jwtp
+go get github.com/alesr/jwtpeek
 ```
 
 ```go
-tok, err := jwtp.Decode(rawToken)
+tok, err := jwtpeek.Decode(rawToken)
 if err != nil {
     // malformed token
 }
@@ -64,5 +64,5 @@ All claims are also available as a raw map via `tok.Claims`.
 The library and CLI are separate Go modules. After cloning, set up a workspace so the CLI picks up the local library:
 
 ```
-go work init . ./cmd/jwtp
+go work init . ./cmd/jwtpeek
 ```

@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/alesr/jwtp"
+	"github.com/alesr/jwtpeek"
 )
 
 const (
@@ -33,14 +33,14 @@ func main() {
 	flag.StringVar(&tokenStr, "token", "", "JWT token to decode")
 	flag.StringVar(&secret, "secret", "", "HMAC secret for signature verification (optional)")
 	flag.Usage = func() {
-		fmt.Fprintf(os.Stderr, "%sUsage:%s jwtp -token <jwt> [-secret <key>]\n\n", colorBold, colorReset)
+		fmt.Fprintf(os.Stderr, "%sUsage:%s jwtpeek -token <jwt> [-secret <key>]\n\n", colorBold, colorReset)
 		fmt.Fprintf(os.Stderr, "Decode and inspect a JSON Web Token.\n\n")
 		fmt.Fprintf(os.Stderr, "Flags:\n")
 		flag.PrintDefaults()
 		fmt.Fprintln(os.Stderr)
 		fmt.Fprintf(os.Stderr, "Example:\n")
-		fmt.Fprintf(os.Stderr, "  jwtp -token eyJhbGciOiJIUzI1NiIs...\n")
-		fmt.Fprintf(os.Stderr, "  jwtp -token eyJhbGciOiJIUzI1NiIs... -secret mysecret\n")
+		fmt.Fprintf(os.Stderr, "  jwtpeek -token eyJhbGciOiJIUzI1NiIs...\n")
+		fmt.Fprintf(os.Stderr, "  jwtpeek -token eyJhbGciOiJIUzI1NiIs... -secret mysecret\n")
 	}
 	flag.Parse()
 
@@ -62,7 +62,7 @@ func main() {
 }
 
 func run(tokenStr, secret string) error {
-	token, err := jwtp.Decode(tokenStr)
+	token, err := jwtpeek.Decode(tokenStr)
 	if err != nil {
 		return err
 	}
@@ -76,14 +76,14 @@ func run(tokenStr, secret string) error {
 	return nil
 }
 
-func printHeader(token *jwtp.Token) {
+func printHeader(token *jwtpeek.Token) {
 	printSection("HEADER")
 
 	printed := make(map[string]bool)
 	priorityKeys := []string{"alg", "typ", "kid", "jku", "x5u", "x5c", "cty"}
 	for _, k := range priorityKeys {
 		if v, exists := token.Header.Raw[k]; exists {
-			printField(jwtp.HeaderLabel(k), fmt.Sprintf("%v", v))
+			printField(jwtpeek.HeaderLabel(k), fmt.Sprintf("%v", v))
 			printed[k] = true
 		}
 	}
@@ -96,11 +96,11 @@ func printHeader(token *jwtp.Token) {
 	}
 	sort.Strings(remaining)
 	for _, k := range remaining {
-		printField(jwtp.HeaderLabel(k), fmt.Sprintf("%v", token.Header.Raw[k]))
+		printField(jwtpeek.HeaderLabel(k), fmt.Sprintf("%v", token.Header.Raw[k]))
 	}
 }
 
-func printPayload(token *jwtp.Token) {
+func printPayload(token *jwtpeek.Token) {
 	printSection("PAYLOAD")
 
 	if len(token.Claims) == 0 {
@@ -108,7 +108,7 @@ func printPayload(token *jwtp.Token) {
 		return
 	}
 
-	stdKeys := jwtp.StandardClaimKeys()
+	stdKeys := jwtpeek.StandardClaimKeys()
 	standardOrder := []string{"iss", "sub", "aud", "jti", "iat", "nbf", "exp"}
 	printed := make(map[string]bool)
 
@@ -131,7 +131,7 @@ func printPayload(token *jwtp.Token) {
 	}
 }
 
-func printStatus(token *jwtp.Token, secret string) {
+func printStatus(token *jwtpeek.Token, secret string) {
 	printSection("STATUS")
 
 	now := time.Now()
@@ -186,7 +186,7 @@ func printSection(title string) {
 func printField(label, value string) { fmt.Printf("  %-16s %s\n", label, value) }
 
 func printClaimValue(label, key string, val any) {
-	if jwtp.IsTimeClaim(key) {
+	if jwtpeek.IsTimeClaim(key) {
 		if ts, ok := toFloat64(val); ok {
 			t := time.Unix(int64(ts), 0).UTC()
 			rel := relativeTime(t, time.Now())

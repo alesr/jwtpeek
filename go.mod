@@ -1,4 +1,4 @@
-module github.com/alesr/jwtp
+module github.com/alesr/jwtpeek
 
 go 1.25.6
 

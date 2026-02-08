@@ -1,9 +1,9 @@
-// Package jwtp provides JWT token decoding, inspection, and validation
+// Package jwtpeek provides JWT token decoding, inspection, and validation
 // without requiring the signing key upfront.
 //
 // Tokens are decoded without signature verification by default.
 // Signature verification can be performed separately via [Token.VerifyHMAC].
-package jwtp
+package jwtpeek
 
 import (
 	"crypto/hmac"
