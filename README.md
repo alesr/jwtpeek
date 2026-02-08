@@ -1,6 +1,6 @@
 # jwtpeek
 
-[![Go Reference](https://pkg.go.dev/badge/github.com/alesr/jwtpeek.git.svg)](https://pkg.go.dev/github.com/alesr/jwtpeek.git)
+[![Go Reference](https://pkg.go.dev/badge/github.com/alesr/jwtpeek.svg)](https://pkg.go.dev/github.com/alesr/jwtpeek)
 [![codecov](https://codecov.io/gh/alesr/jwtpeek/graph/badge.svg?token=7QYM4Yfupt)](https://codecov.io/gh/alesr/jwtpeek)
 
 Decode and verify JWT tokens in Go.
